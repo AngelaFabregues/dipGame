@@ -1,0 +1,63 @@
+<project name="dip-1.6" default="dist" basedir=".">
+<!--project name="dip-1.6.0.2" default="dist" basedir="."-->
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="bin"/>
+  <property name="dist"  location="export"/>
+  <property name="lib"  location="lib"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  	<!-- Create the distribution directory -->
+  	<mkdir dir="${dist}"/>
+  	<!-- Create the lib directory -->
+  	<mkdir dir="${lib}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source " >
+  	<!-- concatenation of lib paths for classpath -->
+  	<path id="lib.classpath">
+  	  <fileset dir="lib/" includes="**/*.jar" />
+  	</path>
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" classpathref="lib.classpath"/>
+  </target>
+
+  <target name="dist" depends="compile" description="generate the distribution, a jar file with the library" >
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}"/>
+  	
+  	
+  	<!--Creates release folder-->
+  	<mkdir dir="${dist}/${ant.project.name}-src"/>
+  	<!--Copies project into release folder-->
+  	<copydir dest="${dist}/${ant.project.name}-src" src="."/>
+  	<!---Excludes export forder-->
+  	<delete dir="${dist}/${ant.project.name}-src/export"/>
+  	<delete dir="${dist}/${ant.project.name}-src/bin"/>
+  	<!--Compresses it-->
+  	<zip destfile="${dist}/${ant.project.name}-src.zip">
+  		<fileset dir="${dist}/${ant.project.name}-src" />
+  	</zip>
+  	<!---Removes release folder-->
+  	<delete dir="${dist}/${ant.project.name}-src"/>
+  	
+  	
+  	<javadoc sourcepath="src" package="no" destdir="${dist}/${ant.project.name}-javadoc"/>
+  </target>
+
+  <target name="clean" description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+</project>
+

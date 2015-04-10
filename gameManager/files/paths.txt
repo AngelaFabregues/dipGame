@@ -1,0 +1,13 @@
+//MAC OS EXAMPLE
+//JAVA_ENV;/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java
+//PARLANCE_PATH;/usr/local/bin/parlance-server
+
+//LINUX EXAMPLE
+//JAVA_ENV;/usr/bin/java
+//PARLANCE_PATH;/usr/local/bin/parlance-server
+
+//WINDOWS EXAMPLE WITH SYSTEM PATH SET
+JAVA_ENV;java
+PARLANCE_PATH;parlance-server
+AIMAPPER_PATH;PROGRAM_FILES//daide//aimapper
+AISERVER_PATH;PROGRAM_FILES//daide//aiserver

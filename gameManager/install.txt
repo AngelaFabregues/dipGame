@@ -1,0 +1,6 @@
+Download and install python from http://www.python.org. (version 2.7.2 is ok). More info: http://docs.python.org/using/windows.html
+Download and install easy_install from http://pypi.python.org/pypi/setuptools#files.
+Set the Path adding C:\Python27;C:\\Python27\\Scripts;
+Download and install parlance from http://pypi.python.org/pypi/Parlance/1.4.1. (Move the egg to C:\Python27\Scripts\)
+
+Download and install java. Set the path also for java.

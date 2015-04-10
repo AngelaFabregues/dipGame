@@ -1,0 +1,7 @@
+//PLAYERS AND EXECUTION COMANDS TO RUN THEM.
+//The player menus are populated with these players in the given order 
+dumbbot;<JAVA_ENV> -jar programs/DumbBot-1.3.jar <ip> <port> <name> <log_folder>
+randombot;<JAVA_ENV> -jar programs/RandomBot-1.3.jar <ip> <port> <name> <log_folder>
+randomnegotiator_dumbbot;<JAVA_ENV> -jar programs/RandomNegotiatorDumbBot-1.3.jar <ip> <port> <name> <nego_ip> <nego_port> <log_folder>
+randomnegotiator_randombot;<JAVA_ENV> -jar programs/RandomNegotiatorRandomBot-1.3.jar <ip> <port> <name> <nego_ip> <nego_port> <log_folder>
+human;<JAVA_ENV> -jar programs/ChatApp-1.0.jar <port> <nego_port> <ip> <nego_ip>

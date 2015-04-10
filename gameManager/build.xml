@@ -1,0 +1,68 @@
+<project name="gameManager-1.0" default="release" basedir=".">
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="bin"/>
+  <property name="dist"  location="export"/>
+  <property name="lib"  location="lib"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  	<!-- Create the distribution directory -->
+  	<mkdir dir="${dist}"/>
+  	<!-- Create the lib directory -->
+  	<mkdir dir="${lib}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source " >
+  	<!-- concatenation of lib paths for classpath -->
+  	<path id="lib.classpath">
+  	  <fileset dir="lib/" includes="**/*.jar" />
+  	</path>
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" classpathref="lib.classpath"/>
+  </target>
+
+  <target name="clean" description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+	<target name="release" depends="compile" description="creates an executable jar file with all the necessary libraries included in it." >
+		<!--Creates release folder-->
+		<mkdir dir="${dist}/${ant.project.name}"/>
+		<!--Generates jar file-->
+	    <jar destfile="${dist}/${ant.project.name}/${ant.project.name}.jar" compress="true">
+		  <fileset dir="${build}" includes="**/*.*" />
+		  <manifest>
+	        <attribute name="Main-Class" value="org.dipgame.gameManager.GameManager" />
+	        <attribute name="Class-Path" value="${dist.manifest.classpath}"/>
+	      </manifest>
+	    </jar>
+		<!--Copies and creates data folders-->
+		<copy todir="${dist}/${ant.project.name}/files">
+			<fileset dir="files"/>
+		</copy>
+		<copy todir="${dist}/${ant.project.name}/programs">
+			<fileset dir="programs"/>
+		</copy>
+		
+		<mkdir dir="${dist}/${ant.project.name}/logs"/>
+		<!--Compresses the resulting folder-->
+		<tar destfile="${dist}/${ant.project.name}.tar.gz" compression="gzip">
+			<fileset dir="${dist}/${ant.project.name}">
+			</fileset>
+		</tar>
+		<zip destfile="${dist}/${ant.project.name}.zip">
+			<fileset dir="${dist}/${ant.project.name}">
+			</fileset>
+		</zip>
+	</target>
+
+</project>
+
